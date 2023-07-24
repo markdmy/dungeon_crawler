@@ -1,33 +1,35 @@
 class scene1 extends Phaser.Scene {
   constructor() {
     super("scene1");
-    this.map = null; // Declare map as a class property
-    this.groundLayer = null; // Declare groundLayer as a class property
-    this.backgroundLayer = null; // Declare backgroundLayer as a class property
   }
 
   create() {
+    this.cursors = this.input.keyboard.createCursorKeys();
+    this.physics.world.gravity.y = 0;
 
-    // The assets should be loaded in the cache, so we can access them
     this.map = this.make.tilemap({ key: 'map' });
     this.cameras.main.setBounds(0, 0, 3392, 100);
     this.physics.world.setBounds(0, 0, 3000, 3000);
     this.physics.world.setBoundsCollision(true, true, true, true);
-    this.cursors = this.input.keyboard.createCursorKeys();
 
     const tiles = this.map.addTilesetImage('ground_tiles', 'tiles');
+    this.hiddenMap = this.map.createStaticLayer('collide_hidden', tiles, 0, 0);
     this.floor = this.map.createStaticLayer('ground', tiles, 0, 0);
     this.walls = this.map.createStaticLayer('walls', tiles, 0, 0);
     this.trees = this.map.createStaticLayer('trees', tiles, 0, 0);
     this.stairs = this.map.createStaticLayer('bridge_stairs', tiles, 0, 0);
 
-    this.enemy = this.physics.add.sprite(250, 250, 'enemy').setScale(0.13);
+
+    this.enemy = this.physics.add.sprite(162, 500, 'enemy').setScale(0.13);
     this.player = this.physics.add.sprite(150, 150, 'player');
 
     //physics
-    this.floor.setCollisionByProperty({ collides: true });
-    this.physics.add.collider(this.player, this.floor, this.hit, null, this);
+    this.hiddenMap.setCollisionByProperty({ collides: true });
+    this.physics.add.collider(this.player, this.hiddenMap, this.hit, null, this);
+    this.physics.add.collider(this.enemy, this.hiddenMap, this.hit, null, this);
     this.physics.add.collider(this.player, this.enemy, this.hit, null, this);
+
+
 
     // Create animations
     this.anims.create({
@@ -47,25 +49,26 @@ class scene1 extends Phaser.Scene {
     this.cameras.main.setBounds(0, 0, 3392, 1900);
     this.cameras.main.startFollow(this.player, true, 0.08, 0.08);
 
-    console.log(this.walls)
+
+
   }
 
   hit() {
-    console.log('hi')
+    console.log('ouch')
   }
 
   update() {
     // Set the player's velocity to control movement
-    const speed = 100;
-
+    const speed = 300;
+  
     this.player.setVelocity(0, 0); // Reset the velocity on each update
-
+  
     if (this.cursors.up.isDown) {
       this.player.setVelocityY(-speed);
     } else if (this.cursors.down.isDown) {
       this.player.setVelocityY(speed);
     }
-
+  
     if (this.cursors.left.isDown) {
       this.player.setVelocityX(-speed);
       this.player.anims.play('moveLeft', true);
@@ -75,6 +78,13 @@ class scene1 extends Phaser.Scene {
     } else {
       this.player.setVelocityX(0);
       this.player.anims.stop(); // Stop the animation when no arrow key is pressed
+    }
+    // Moves to next map when player has reached coordinates
+    const xInRange = this.player.x >= 140 && this.player.x <= 180;
+    const yInRange = this.player.y >= 500 && this.player.y <= 520;
+  
+    if (xInRange && yInRange) {
+      this.scene.switch('scene2');
     }
   }
 }

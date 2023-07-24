@@ -8,11 +8,11 @@ window.onload = function () {
     physics: {
       default: "arcade",
       arcade: {
-        gravity: { y: 0, x: 0 },
+        gravity: {y: 200}
       }
     },
 
-    scene: [preloadGame, scene1]
+    scene: [preloadGame, scene1, scene2]
   }
   game = new Phaser.Game(gameConfig);
 }
