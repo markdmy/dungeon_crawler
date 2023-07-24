@@ -20,10 +20,10 @@ class scene2 extends Phaser.Scene {
     this.exit = this.mapDungeon.createStaticLayer('exit', tiles, 0, 0);
     
     this.player = this.physics.add.sprite(65, 560, "player");
+
+
     this.physics.world.gravity.y = 900;
     this.physics.world.setBounds(0, 0, 10000, 3000);
-    this.physics.world.setBoundsCollision(true, true, true, true);
-
 
 
     this.floor = this.mapDungeon.createStaticLayer('floor', tiles, 0, 0);
@@ -45,7 +45,7 @@ class scene2 extends Phaser.Scene {
     this.music = this.sound.add("dungeonmusic");
     var musicConfig = {
       mute: false,
-      volume: 1.4,
+      volume: 1,
       rate: 1,
       detune: 0,
       seek: 0,
@@ -62,7 +62,7 @@ class scene2 extends Phaser.Scene {
 
   exitToMap() {
     this.sound.stopAll(); 
-    this.scene.switch('sceneMenu');
+    this.scene.switch('scene3');
   }
 
   update() {
@@ -84,7 +84,7 @@ class scene2 extends Phaser.Scene {
     const yInRange = this.player.y >= 640;
 
     if (yInRange) {
-      this.scene.restart(sceneMenu);
+      this.scene.restart(scene3);
 
     }
   }
