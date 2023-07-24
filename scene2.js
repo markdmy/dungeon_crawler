@@ -14,10 +14,11 @@ class scene2 extends Phaser.Scene {
       .setOrigin(0, 0)
       .setScrollFactor(0.3, 0);
 
-      this.mapDungeon = this.make.tilemap({ key: 'mapDungeon' })
-      const tiles = this.mapDungeon.addTilesetImage('fantasy-tileset', 'tilesDungeon');
-      this.door = this.mapDungeon.createStaticLayer('door', tiles, 0, 0);
-
+    this.mapDungeon = this.make.tilemap({ key: 'mapDungeon' })
+    const tiles = this.mapDungeon.addTilesetImage('fantasy-tileset', 'tilesDungeon');
+    this.door = this.mapDungeon.createStaticLayer('door', tiles, 0, 0);
+    this.exit = this.mapDungeon.createStaticLayer('exit', tiles, 0, 0);
+    
     this.player = this.physics.add.sprite(65, 560, "player");
     this.physics.world.gravity.y = 900;
     this.physics.world.setBounds(0, 0, 10000, 3000);
@@ -28,9 +29,10 @@ class scene2 extends Phaser.Scene {
     this.floor = this.mapDungeon.createStaticLayer('floor', tiles, 0, 0);
     this.platforms = this.mapDungeon.createStaticLayer('platforms', tiles, 0, 0);
 
-
+    this.exit.setCollisionByProperty({ collides: true });
     this.floor.setCollisionByProperty({ collides: true });
     this.platforms.setCollisionByProperty({ collides: true });
+    this.physics.add.collider(this.player, this.exit, this.exitToMap, null, this);
     this.physics.add.collider(this.player, this.floor, this.hit, null, this);
     this.physics.add.collider(this.player, this.platforms, this.hit, null, this);
 
@@ -39,10 +41,28 @@ class scene2 extends Phaser.Scene {
     this.cameras.main.startFollow(this.player, true, 0.08, 0.08);
 
     this.isPlayerMoving = false;
+
+    this.music = this.sound.add("dungeonmusic");
+    var musicConfig = {
+      mute: false,
+      volume: 1.4,
+      rate: 1,
+      detune: 0,
+      seek: 0,
+      loop: true,
+      delay: 0
+    }
+    this.music.play(musicConfig);
+
   }
 
   hit() {
     console.log('ouch')
+  }
+
+  exitToMap() {
+    this.sound.stopAll(); 
+    this.scene.switch('sceneMenu');
   }
 
   update() {
@@ -62,10 +82,10 @@ class scene2 extends Phaser.Scene {
     }
 
     const yInRange = this.player.y >= 640;
-  
-    if (yInRange) {
-      this.scene.restart();
 
+    if (yInRange) {
+      this.scene.restart(sceneMenu);
+
+    }
   }
-}
 }

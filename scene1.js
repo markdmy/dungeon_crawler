@@ -49,7 +49,17 @@ class scene1 extends Phaser.Scene {
     this.cameras.main.setBounds(0, 0, 3392, 1900);
     this.cameras.main.startFollow(this.player, true, 0.08, 0.08);
 
-
+    this.music = this.sound.add("overworldmusic");
+    var musicConfig = {
+        mute: false,
+        volume: 0.05,
+        rate: 1,
+        detune: 0,
+        seek: 0,
+        loop: true,
+        delay: 0
+    }
+    this.music.play(musicConfig);
 
   }
 
@@ -84,7 +94,9 @@ class scene1 extends Phaser.Scene {
     const yInRange = this.player.y >= 500 && this.player.y <= 520;
   
     if (xInRange && yInRange) {
+      this.sound.stopAll(); 
       this.scene.switch('scene2');
+
     }
   }
 }

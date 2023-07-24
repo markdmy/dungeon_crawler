@@ -12,7 +12,7 @@ window.onload = function () {
       }
     },
 
-    scene: [preloadGame, scene1, scene2]
+    scene: [preloadGame, sceneMenu,scene1, scene2]
   }
   game = new Phaser.Game(gameConfig);
 }
