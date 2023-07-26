@@ -1,24 +1,31 @@
 class scene2 extends Phaser.Scene {
   constructor() {
     super("scene2");
+
+
   }
+
+
+
   create() {
+
+
     this.physics.world.setBoundsCollision(true, true, true, true);
     this.cursors = this.input.keyboard.createCursorKeys();
 
     this.bg1 = this.add.tileSprite(0, 0, 3960, 640, 'bg_1') // Use tileSprite for seamless looping
       .setOrigin(0, 0)
-      .setScrollFactor(0.2, 0);
+      .setScrollFactor(0.05, 0);
 
     this.bg2 = this.add.tileSprite(0, 0, 3960, 640, 'bg_2') // Use tileSprite for seamless looping
       .setOrigin(0, 0)
-      .setScrollFactor(0.3, 0);
+      .setScrollFactor(0.1, 0);
 
     this.mapDungeon = this.make.tilemap({ key: 'mapDungeon' })
     const tiles = this.mapDungeon.addTilesetImage('fantasy-tileset', 'tilesDungeon');
     this.door = this.mapDungeon.createStaticLayer('door', tiles, 0, 0);
     this.exit = this.mapDungeon.createStaticLayer('exit', tiles, 0, 0);
-    
+
     this.player = this.physics.add.sprite(65, 560, "player");
 
 
@@ -42,6 +49,27 @@ class scene2 extends Phaser.Scene {
 
     this.isPlayerMoving = false;
 
+    // player animations
+    this.player.anims.play('idleAnimation');
+
+    // Create animations
+    this.anims.create({
+      key: 'moveRight',
+      frames: this.anims.generateFrameNumbers('player', { start: 11, end: 20 }),
+      frameRate: 10,
+      repeat: -1
+    });
+
+    this.anims.create({
+      key: 'moveLeft',
+      frames: this.anims.generateFrameNumbers('player', { start: 11, end: 20 }),
+      frameRate: 10,
+      repeat: -1
+    });
+
+
+    //audio
+
     this.music = this.sound.add("dungeonmusic");
     var musicConfig = {
       mute: false,
@@ -61,7 +89,7 @@ class scene2 extends Phaser.Scene {
   }
 
   exitToMap() {
-    this.sound.stopAll(); 
+    this.sound.stopAll();
     this.scene.switch('scene3');
   }
 

@@ -4,7 +4,7 @@ class sceneMenu extends Phaser.Scene {
     }
     create() {
 
-        this.title = this.add.text(21, 300, 'Mark`s amazing main menu screen click to start', {
+        this.title = this.add.text(21, 300, 'Working Title: click to start', {
             fontSize: '34px',
             fill: '#fff', fontFamily: 'Trebuchet MS, "Goudy Bookletter 1911", Times, serif'
         }).setOrigin(0);

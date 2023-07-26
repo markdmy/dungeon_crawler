@@ -4,12 +4,18 @@ class preloadGame extends Phaser.Scene {
   }
   
   preload() {
-    this.load.spritesheet("player", "assets/images/character.png", {
+    this.load.spritesheet("player", "assets/images/player_spritesheet.png", {
       frameWidth: 32,
       frameHeight: 32
     });
+
+    this.load.spritesheet("friend", "assets/images/friend_spritesheet.png", {
+      frameWidth: 32,
+      frameHeight: 32
+    });
+
     this.physics.world.setBounds(0, 0, 960, 640);
-    this.load.image('enemy', 'assets/images/enemy.png');
+
     this.load.tilemapTiledJSON('map', 'assets/tiles/map.json');
     this.load.image('tiles', 'assets/tiles/ground_tiles.png');
     this.load.tilemapTiledJSON('mapDungeon', 'assets/tiles/dungeon_map.json');
@@ -22,10 +28,12 @@ class preloadGame extends Phaser.Scene {
 
     this.load.audio("overworldmusic", ["assets/audio/overworld.mp3"]);
     this.load.audio("dungeonmusic", ["assets/audio/dungeon1.mp3"]);
-
   }
   
   create() {
     this.scene.start("sceneMenu");
   }
 }
+
+
+// https://opengameart.org/content/lpc-tile-atlas 
