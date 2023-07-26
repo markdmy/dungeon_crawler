@@ -9,7 +9,7 @@ class scene1 extends Phaser.Scene {
     this.music = this.sound.add("overworldmusic");
     var musicConfig = {
         mute: false,
-        volume: 0.6,
+        volume: 0.2,
         rate: 1,
         detune: 0,
         seek: 0,
