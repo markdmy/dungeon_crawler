@@ -4,6 +4,21 @@ class scene1 extends Phaser.Scene {
   }
 
   create() {
+
+    
+    this.music = this.sound.add("overworldmusic");
+    var musicConfig = {
+        mute: false,
+        volume: 0.6,
+        rate: 1,
+        detune: 0,
+        seek: 0,
+        loop: true,
+        delay: 0
+    }
+    this.music.play(musicConfig);
+
+
     this.cursors = this.input.keyboard.createCursorKeys();
     this.physics.world.gravity.y = 0;
 
@@ -69,18 +84,6 @@ class scene1 extends Phaser.Scene {
 
     this.cameras.main.setBounds(0, 0, 3392, 1900);
     this.cameras.main.startFollow(this.player, true, 0.08, 0.08);
-
-    this.music = this.sound.add("overworldmusic");
-    var musicConfig = {
-        mute: false,
-        volume: 0.3,
-        rate: 1,
-        detune: 0,
-        seek: 0,
-        loop: true,
-        delay: 0
-    }
-    this.music.play(musicConfig);
 
   }
 
