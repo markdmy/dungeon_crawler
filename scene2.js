@@ -62,6 +62,7 @@ class scene2 extends Phaser.Scene {
       repeat: -1
     });
 
+
     //audio
 
     this.music = this.sound.add("dungeonmusic");
@@ -92,15 +93,25 @@ class scene2 extends Phaser.Scene {
     this.bg2.setTilePosition(this.cameras.main.scrollX);
 
     if (this.cursors.left.isDown) {
+      this.player.setScale(-1, 1);
       this.player.setVelocityX(-300); // Move left
+      this.player.anims.play('moveLeft', true);
+      this.player.setOffset(32, 0); // Adjust the body offset when facing left
+      
+      
     } else if (this.cursors.right.isDown) {
       this.player.setVelocityX(300); // Move right
+      this.player.anims.play('moveRight', true);
+      this.player.setOffset(0, 0); // Adjust the body offset when facing left
+      this.player.setScale(1, 1);
     } else {
       this.player.setVelocityX(0); // Stop horizontal movement
+      this.player.anims.play('idleAnimation');
     }
 
     if (this.cursors.up.isDown && this.player.body.onFloor()) {
       this.player.setVelocityY(-700); // Jump if on the floor
+      this.player.anims.play('idleAnimation');
     }
 
     const yInRange = this.player.y >= 640;

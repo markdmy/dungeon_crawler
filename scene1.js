@@ -5,7 +5,6 @@ class scene1 extends Phaser.Scene {
 
   create() {
 
-    
     this.music = this.sound.add("overworldmusic");
     var musicConfig = {
         mute: false,
@@ -109,14 +108,17 @@ class scene1 extends Phaser.Scene {
       this.player.setScale(-1, 1);
       this.player.setVelocityX(-speed);
       this.player.anims.play('moveLeft', true);
+      this.player.setOffset(32, 0); // Adjust the body offset when facing left
       
     } else if (this.cursors.right.isDown) {
       this.player.setVelocityX(speed);
       this.player.anims.play('moveRight', true);
+      this.player.setOffset(0, 0); // Adjust the body offset when facing left
       this.player.setScale(1, 1);
     } else {
       this.player.setVelocityX(0);
       this.player.anims.play('idleAnimation', true);
+      this.player.setOffset(0, 0); // Adjust the body offset when facing left
     }
     // Moves to next map when player has reached coordinates
     const xInRange = this.player.x >= 140 && this.player.x <= 180;

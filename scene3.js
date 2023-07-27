@@ -163,12 +163,10 @@ class scene3 extends Phaser.Scene {
 
   update() {
 
-
-    // Set the player's velocity to control movement
     const speed = 300;
-
+  
     this.player.setVelocity(0, 0); // Reset the velocity on each update
-
+  
     if (this.cursors.up.isDown) {
       this.player.setVelocityY(-speed);
       this.player.anims.play('moveUp', true);
@@ -176,18 +174,22 @@ class scene3 extends Phaser.Scene {
       this.player.setVelocityY(speed);
       this.player.anims.play('moveDown', true);
     }
-
+  
     if (this.cursors.left.isDown) {
       this.player.setScale(-1, 1);
       this.player.setVelocityX(-speed);
       this.player.anims.play('moveLeft', true);
+      this.player.setOffset(32, 0); // Adjust the body offset when facing left
+      
     } else if (this.cursors.right.isDown) {
       this.player.setVelocityX(speed);
       this.player.anims.play('moveRight', true);
+      this.player.setOffset(0, 0); // Adjust the body offset when facing left
       this.player.setScale(1, 1);
     } else {
       this.player.setVelocityX(0);
       this.player.anims.play('idleAnimation', true);
+      this.player.setOffset(0, 0); // Adjust the body offset when facing left
     }
     // Moves to next map when player has reached coordinates
     const xInRange = this.player.x >= 140 && this.player.x <= 180;
