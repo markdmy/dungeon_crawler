@@ -1,14 +1,9 @@
 class scene2 extends Phaser.Scene {
   constructor() {
     super("scene2");
-
-
   }
 
-
-
   create() {
-
 
     this.physics.world.setBoundsCollision(true, true, true, true);
     this.cursors = this.input.keyboard.createCursorKeys();
@@ -30,7 +25,7 @@ class scene2 extends Phaser.Scene {
 
 
     this.physics.world.gravity.y = 900;
-    this.physics.world.setBounds(0, 0, 10000, 3000);
+    this.physics.world.setBounds(0, 0, 20000, 3000);
 
 
     this.floor = this.mapDungeon.createStaticLayer('floor', tiles, 0, 0);
@@ -44,7 +39,7 @@ class scene2 extends Phaser.Scene {
     this.physics.add.collider(this.player, this.platforms, this.hit, null, this);
 
     //camera functions
-    this.cameras.main.setBounds(0, 0, 10000, 640);
+    this.cameras.main.setBounds(0, 0, 20000, 640);
     this.cameras.main.startFollow(this.player, true, 0.08, 0.08);
 
     this.isPlayerMoving = false;
@@ -66,7 +61,6 @@ class scene2 extends Phaser.Scene {
       frameRate: 10,
       repeat: -1
     });
-
 
     //audio
 
