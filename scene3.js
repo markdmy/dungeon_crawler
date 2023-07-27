@@ -60,6 +60,7 @@ class scene3 extends Phaser.Scene {
     this.trees = this.map.createStaticLayer('other', tiles, 0, 0);
 
     // Add the sprites to the fireworks group
+
     this.fireworks.create(180, 145, 'fireworks').setScale(7).refreshBody();
     this.fireworks.create(150, 475, 'fireworks').setScale(7).refreshBody();
     this.fireworks.create(380, 295, 'fireworks').setScale(7).refreshBody();

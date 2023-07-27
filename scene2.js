@@ -21,9 +21,24 @@ class scene2 extends Phaser.Scene {
     this.door = this.mapDungeon.createStaticLayer('door', tiles, 0, 0);
     this.exit = this.mapDungeon.createStaticLayer('exit', tiles, 0, 0);
 
+    this.particles = this.add.particles('explode');
+
+    this.emitterPlayerTrail = this.particles.createEmitter({
+      lifespan: 200,
+      accelerationY: 1500,
+      y: 3,
+      scale: { start: .05, end: 0 },
+      blendMode: 'ADD',
+      tint: 0x000000,
+      frequency: 100, // Decrease the frequency to space out the particles
+      alpha: { start: 0.8, end: 0 }, // Adjust alpha to make particles a little transparent
+  });
+
+
     this.player = this.physics.add.sprite(65, 560, "player");
-
-
+    this.emitterPlayerTrail.startFollow(this.player);
+    this.emitterPlayerTrail.setVisible(false);
+    
     this.physics.world.gravity.y = 900;
     this.physics.world.setBounds(0, 0, 20000, 3000);
 
@@ -76,7 +91,6 @@ class scene2 extends Phaser.Scene {
       delay: 0
     }
     this.music.play(musicConfig);
-
   }
 
   hit() {
@@ -109,15 +123,23 @@ class scene2 extends Phaser.Scene {
       this.player.anims.play('idleAnimation');
     }
 
+    if (this.player.body.onFloor()) {
+      this.emitterPlayerTrail.setVisible(false);
+    }
+
     if (this.cursors.up.isDown && this.player.body.onFloor()) {
       this.player.setVelocityY(-700); // Jump if on the floor
       this.player.anims.play('idleAnimation');
+      this.emitterPlayerTrail.setVisible(true);
+      this.sound.play('jumpSound', { volume: 0.5 });
     }
+   
+
 
     const yInRange = this.player.y >= 640;
 
     if (yInRange) {
-      this.scene.restart(scene3);
+      this.scene.restart(scene2);
 
     }
   }

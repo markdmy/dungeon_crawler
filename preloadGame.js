@@ -30,15 +30,17 @@ class preloadGame extends Phaser.Scene {
     this.load.image("bgMenu", "assets/images/bg_menu.png");
     this.load.image('bg_1', 'assets/images/bg-1.png');
     this.load.image('bg_2', 'assets/images/bg-2.png');
-    this.load.image('stoneGround', 'assets/images/stone_ground.jpg');
+
+    this.load.image("explode", "assets/images/orangelight.png");
 
     this.load.audio("overworldmusic", ["assets/audio/overworld.mp3"]);
     this.load.audio("dungeonmusic", ["assets/audio/dungeon1.mp3"]);
     this.load.audio("victoryMusic", ["assets/audio/victory_theme.mp3"]);
+    this.load.audio("jumpSound", ["assets/audio/jump.mp3"]);
   }
   
   create() {
-    this.scene.start("scene3");
+    this.scene.start("sceneMenu");
   }
 }
 
