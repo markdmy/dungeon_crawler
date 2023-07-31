@@ -8,7 +8,7 @@ class scene1 extends Phaser.Scene {
     this.music = this.sound.add("overworldmusic");
     var musicConfig = {
         mute: false,
-        volume: 0.05,
+        volume: 0.02,
         rate: 1,
         detune: 0,
         seek: 0,
@@ -23,7 +23,7 @@ class scene1 extends Phaser.Scene {
 
     this.map = this.make.tilemap({ key: 'map' });
     this.cameras.main.setBounds(0, 0, 3392, 100);
-    this.physics.world.setBounds(0, 0, 3000, 3000);
+    this.physics.world.setBounds(0, 0, 1120, 800);
     this.physics.world.setBoundsCollision(true, true, true, true);
 
     const tiles = this.map.addTilesetImage('ground_tiles', 'tiles');
@@ -32,6 +32,7 @@ class scene1 extends Phaser.Scene {
     this.walls = this.map.createStaticLayer('walls', tiles, 0, 0);
     this.stairs = this.map.createStaticLayer('bridge_stairs', tiles, 0, 0);
     this.player = this.physics.add.sprite(150, 150, 'player');
+    this.player.setCollideWorldBounds(true);
     this.trees = this.map.createStaticLayer('trees', tiles, 0, 0);
 
     //physics

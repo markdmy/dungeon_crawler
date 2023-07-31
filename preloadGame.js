@@ -26,17 +26,28 @@ class preloadGame extends Phaser.Scene {
     this.load.tilemapTiledJSON('mapDungeon', 'assets/tiles/dungeon_map.json');
     this.load.image('tilesDungeon', 'assets/tiles/dungeon_tiles.png');
     this.load.tilemapTiledJSON('map2', 'assets/tiles/map2.json');
-    
+
+    this.load.image('tilesForest', 'assets/tiles/forest_tiles.png');
+    this.load.tilemapTiledJSON('mapForest', 'assets/tiles/forest_map.json');
+
     this.load.image("bgMenu", "assets/images/bg_menu.png");
+    this.load.image("bgEnd", "assets/images/bg_end.png");
+    this.load.image("bgMenuFrog", "assets/images/bg_menu_frog.png");
+    this.load.image("bgMenuRabbit", "assets/images/bg_menu_rabbit.png");
     this.load.image('bg_1', 'assets/images/bg-1.png');
     this.load.image('bg_2', 'assets/images/bg-2.png');
+    this.load.image('bg_3', 'assets/images/bg-1forest.png');
+    this.load.image('bg_4', 'assets/images/bg-2forest.png');
+    this.load.image('resetBtn', 'assets/images/reset_button.png')
 
     this.load.image("explode", "assets/images/orangelight.png");
 
     this.load.audio("overworldmusic", ["assets/audio/overworld.mp3"]);
     this.load.audio("dungeonmusic", ["assets/audio/dungeon1.mp3"]);
+    this.load.audio("forestmusic", ["assets/audio/forest1.mp3"]);
     this.load.audio("victoryMusic", ["assets/audio/victory_theme.mp3"]);
     this.load.audio("jumpSound", ["assets/audio/jump.mp3"]);
+
   }
   
   create() {

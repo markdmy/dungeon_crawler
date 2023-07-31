@@ -99,7 +99,7 @@ class scene2 extends Phaser.Scene {
 
   exitToMap() {
     this.sound.stopAll();
-    this.scene.switch('scene3');
+    this.scene.switch('scene4');
   }
 
   update() {
@@ -133,13 +133,12 @@ class scene2 extends Phaser.Scene {
       this.emitterPlayerTrail.setVisible(true);
       this.sound.play('jumpSound', { volume: 0.5 });
     }
-   
-
 
     const yInRange = this.player.y >= 640;
 
     if (yInRange) {
-      this.scene.restart(scene2);
+      this.sound.stopAll();
+      this.scene.restart(); 
 
     }
   }
