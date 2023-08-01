@@ -52,7 +52,7 @@ class scene4 extends Phaser.Scene {
     }
     exitToMap() {
         this.sound.stopAll();
-        this.scene.switch('scene3');
+        this.scene.switch('scene5');
     }
 
     update() {
@@ -63,9 +63,6 @@ class scene4 extends Phaser.Scene {
             this.player.setScale(-1, 1);
             this.player.setVelocityX(-300); // Move left
 
-
-
-
         } else if (this.cursors.right.isDown) {
             this.player.setVelocityX(300); // Move right
 
@@ -75,10 +72,8 @@ class scene4 extends Phaser.Scene {
             this.player.setVelocityX(0); // Stop horizontal movement
         }
 
-
-
         if (this.cursors.up.isDown && this.player.body.onFloor()) {
-            this.player.setVelocityY(-700); // Jump if on the floor
+            this.player.setVelocityY(-650); // Jump if on the floor
         }
         const yInRange = this.player.y >= 1290;
 

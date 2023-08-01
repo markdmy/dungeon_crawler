@@ -31,7 +31,7 @@ class scene1 extends Phaser.Scene {
     this.path = this.map.createStaticLayer('path', tiles, 0, 0);
 
     this.stairs = this.map.createStaticLayer('bridge_stairs', tiles, 0, 0);
-    this.player = this.physics.add.sprite(150, 150, 'player');
+    this.player = this.physics.add.sprite(170, 290, 'player');
     this.trees = this.map.createStaticLayer('trees', tiles, 0, 0);
     this.player.setCollideWorldBounds(true);
 

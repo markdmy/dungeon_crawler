@@ -29,7 +29,7 @@ function createPopUpBox(scene, width, height, text) {
 
 function rollCredits(scene) {
   console.log('text credits');
-  const textContent = "\n \n \n \n \n \n \n \n \n \n \n \n \n \nExecutive Producer - Mark Dmytryshyn\n\nWriting Team - Mark Dmytryshyn\n\nDevelopment Team - Mark Dmytryshyn\n\nTalent Director - Mark Dmytryshyn\n\nMusic - Various Artists\n\nGraphics - Various Artists\n\nGame Built on Phaser Framework\n\n\n\nSpecial Thanks to Brent Page\n\n\n\n\n\n\n\n\n\n\n2023 Mark Dmytryshyn \u00A9";
+  const textContent = "\n \n \n \n \n \n \n \n \n \n \n \n \n \nExecutive Producer - Mark Dmytryshyn\n\nWriting Team - Mark Dmytryshyn\n\nLead Developer - Mark Dmytryshyn\n\nTiling Artist - Mark Dmytryshyn\n\nDevelopment Team - Mark Dmytryshyn\n\nTalent Director - Mark Dmytryshyn\n\nMusic - Dopestuff, sinneslöschen, Miyagisama \n\nGraphics - Anokolisa, Pixel Frog, adrix89\n\nGame Testers - Brent Page\n\n\n\n\n\n\nGame Built on Phaser JS Framework\n\n\n\n\n\n\n\n2023 Mark Dmytryshyn \u00A9";
   const textOptions = {
     fontSize: '30px',
     fill: '#000000',
