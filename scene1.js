@@ -22,18 +22,18 @@ class scene1 extends Phaser.Scene {
     this.physics.world.gravity.y = 0;
 
     this.map = this.make.tilemap({ key: 'map' });
-    this.cameras.main.setBounds(0, 0, 3392, 100);
-    this.physics.world.setBounds(0, 0, 1120, 800);
+    this.cameras.main.setBounds(0, 0, 1600, 1400);
+    this.physics.world.setBounds(0, 0, 1600, 1400);
     this.physics.world.setBoundsCollision(true, true, true, true);
-
     const tiles = this.map.addTilesetImage('ground_tiles', 'tiles');
     this.hiddenMap = this.map.createStaticLayer('collide_hidden', tiles, 0, 0);
     this.floor = this.map.createStaticLayer('ground', tiles, 0, 0);
-    this.walls = this.map.createStaticLayer('walls', tiles, 0, 0);
+    this.path = this.map.createStaticLayer('path', tiles, 0, 0);
+
     this.stairs = this.map.createStaticLayer('bridge_stairs', tiles, 0, 0);
     this.player = this.physics.add.sprite(150, 150, 'player');
-    this.player.setCollideWorldBounds(true);
     this.trees = this.map.createStaticLayer('trees', tiles, 0, 0);
+    this.player.setCollideWorldBounds(true);
 
     //physics
     this.hiddenMap.setCollisionByProperty({ collides: true });
@@ -122,8 +122,8 @@ class scene1 extends Phaser.Scene {
       this.player.setOffset(0, 0); // Adjust the body offset when facing left
     }
     // Moves to next map when player has reached coordinates
-    const xInRange = this.player.x >= 140 && this.player.x <= 180;
-    const yInRange = this.player.y >= 500 && this.player.y <= 520;
+    const xInRange = this.player.x >= 1355 && this.player.x <= 1399;
+    const yInRange = this.player.y >= 140 && this.player.y <= 160;
   
     if (xInRange && yInRange) {
       this.sound.stopAll(); 
@@ -132,3 +132,4 @@ class scene1 extends Phaser.Scene {
     }
   }
 }
+1380, 150
