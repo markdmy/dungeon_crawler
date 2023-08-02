@@ -9,15 +9,15 @@ class scene5 extends Phaser.Scene {
     this.cursors = this.input.keyboard.createCursorKeys();
     this.physics.world.gravity.y = 500;
     this.physics.world.setBounds(0, 0, 20000, 10000);
-    this.bg1 = this.add.tileSprite(0, 0, 3960, 940, 'bg_5') // Use tileSprite for seamless looping
+    this.bg1 = this.add.tileSprite(0, 0, 3960, 940, 'bg_5') 
       .setOrigin(0, 0)
       .setScrollFactor(1, 0);
 
-    this.bg2 = this.add.tileSprite(0, 0, 3960, 940, 'bg_6') // Use tileSprite for seamless looping
+    this.bg2 = this.add.tileSprite(0, 0, 3960, 940, 'bg_6') 
       .setOrigin(0, 0)
       .setScrollFactor(1, 0);
 
-    this.bgMain = this.add.tileSprite(0, 0, 3960, 940, 'bg_7') // Use tileSprite for seamless looping
+    this.bgMain = this.add.tileSprite(0, 0, 3960, 940, 'bg_7') 
       .setOrigin(0, 0)
       .setScrollFactor(1, 0);
 
@@ -39,8 +39,8 @@ class scene5 extends Phaser.Scene {
       scale: { start: .05, end: 0 },
       blendMode: 'ADD',
       tint: 0x000000,
-      frequency: 100, // Decrease the frequency to space out the particles
-      alpha: { start: 0.8, end: 0 }, // Adjust alpha to make particles a little transparent
+      frequency: 100, 
+      alpha: { start: 0.8, end: 0 }, 
     });
 
     this.anims.create({
@@ -56,8 +56,6 @@ class scene5 extends Phaser.Scene {
       frameRate: 10,
       repeat: -1
     });
-
-
 
     this.player = this.physics.add.sprite(100, 2130, "player");
     this.emitterPlayerTrail.startFollow(this.player);
@@ -80,7 +78,6 @@ class scene5 extends Phaser.Scene {
       delay: 0
     }
     this.music.play(musicConfig);
-
   }
 
   exitToMap() {
@@ -94,19 +91,16 @@ class scene5 extends Phaser.Scene {
 
     if (this.cursors.left.isDown) {
       this.player.setScale(-1, 1);
-      this.player.setVelocityX(-300); // Move left
-
-      this.player.setOffset(32, 0); // Adjust the body offset when facing left
-
+      this.player.setVelocityX(-300); 
+      this.player.setOffset(32, 0); 
 
     } else if (this.cursors.right.isDown) {
-      this.player.setVelocityX(300); // Move right
+      this.player.setVelocityX(300); 
 
-      this.player.setOffset(0, 0); // Adjust the body offset when facing left
+      this.player.setOffset(0, 0); 
       this.player.setScale(1, 1);
     } else {
-      this.player.setVelocityX(0); // Stop horizontal movement
-
+      this.player.setVelocityX(0);
     }
 
     if (this.player.body.onFloor()) {
@@ -114,7 +108,7 @@ class scene5 extends Phaser.Scene {
     }
 
     if (this.cursors.up.isDown && this.player.body.onFloor()) {
-      this.player.setVelocityY(-500); // Jump if on the floor
+      this.player.setVelocityY(-500); 
 
       this.emitterPlayerTrail.setVisible(true);
       this.sound.play('jumpSound', { volume: 0.5 });

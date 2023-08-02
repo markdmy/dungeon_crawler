@@ -13,7 +13,6 @@ function createPopUpBox(scene, width, height, text) {
     ease: 'Linear',
   });
 
-  // Add a delay of 3 seconds before fading out the text
   scene.tweens.add({
     targets: textBox,
     alpha: 0,
@@ -21,7 +20,6 @@ function createPopUpBox(scene, width, height, text) {
     duration: 1000,
     ease: 'Linear',
     onComplete: () => {
-      // Once the fade-out tween is complete, remove the text box from the scene
       textBox.destroy();
     },
   });
@@ -34,25 +32,22 @@ function rollCredits(scene) {
     fontSize: '30px',
     fill: '#000000',
     fontFamily: 'pixeloid',
-    align: 'center', // Center-align the text
+    align: 'center', 
     wordWrap: {
-      width: 700 // Adjust the width as needed to control text wrapping
+      width: 700 
     },
   };
 
-  // Calculate the Y position to start the text from the bottom of the screen
   const startY = scene.cameras.main.height;
 
-  // Create the scrolling text
   const creditsText = scene.add.text(scene.cameras.main.width / 2, startY, textContent, textOptions)
-    .setOrigin(0.5, 0.3) // Set the origin to the bottom center
-    .setAlpha(1); // Start with the text invisible
+    .setOrigin(0.5, 0.3) 
+    .setAlpha(1); 
 
-  // Set up the scrolling animation
-  const scrollDuration = 50000; // Adjust the duration to control the scrolling speed
+  const scrollDuration = 50000; 
   scene.tweens.add({
     targets: creditsText,
-    y: -creditsText.height, // Scroll the text upwards until it goes off the screen
+    y: -creditsText.height,
     alpha: 1,
     ease: 'Linear',
     duration: scrollDuration,
@@ -121,23 +116,22 @@ class scene3 extends Phaser.Scene {
       sprite.alpha = 0;
     });
 
-    //physics  
     this.hiddenMap.setCollisionByProperty({ collides: true });
     this.physics.add.collider(this.player, this.hiddenMap, null, null, this);
     this.physics.add.collider(this.player, this.friend, this.hit, null, this);
 
     this.anims.create({
-      key: 'idleAnimation',        // Unique key for the animation
+      key: 'idleAnimation',
       frames: this.anims.generateFrameNumbers('player', { start: 0, end: 10 }),
-      frameRate: 5,  // Frames per second for the animation
-      repeat: -1,                  // Set to -1 to make the animation loop, set to a positive integer for a specific number of repetitions
+      frameRate: 5, 
+      repeat: -1,         
     });
 
     this.anims.create({
-      key: 'idleFriendAnimation',        // Unique key for the animation
+      key: 'idleFriendAnimation',       
       frames: this.anims.generateFrameNumbers('friend', { start: 0, end: 10 }),
-      frameRate: 5,  // Frames per second for the animation
-      repeat: -1,                  // Set to -1 to make the animation loop, set to a positive integer for a specific number of repetitions
+      frameRate: 5,  
+      repeat: -1,             
     });
 
     this.player.anims.play('idleAnimation');
@@ -214,7 +208,7 @@ class scene3 extends Phaser.Scene {
   update() {
     const speed = 300;
 
-    this.player.setVelocity(0, 0); // Reset the velocity on each update
+    this.player.setVelocity(0, 0);
     if (canMove == true) {
       if (this.cursors.up.isDown) {
         this.player.setVelocityY(-speed);
@@ -228,16 +222,16 @@ class scene3 extends Phaser.Scene {
         this.player.setScale(-1, 1);
         this.player.setVelocityX(-speed);
         this.player.anims.play('moveLeft', true);
-        this.player.setOffset(32, 0); // Adjust the body offset when facing left
+        this.player.setOffset(32, 0); 
       } else if (this.cursors.right.isDown) {
         this.player.setVelocityX(speed);
         this.player.anims.play('moveRight', true);
-        this.player.setOffset(0, 0); // Adjust the body offset when facing left
+        this.player.setOffset(0, 0); 
         this.player.setScale(1, 1);
       } else {
         this.player.setVelocityX(0);
         this.player.anims.play('idleAnimation', true);
-        this.player.setOffset(0, 0); // Adjust the body offset when facing left
+        this.player.setOffset(0, 0); 
       }
     }
   }

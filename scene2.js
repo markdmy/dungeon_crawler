@@ -4,15 +4,14 @@ class scene2 extends Phaser.Scene {
   }
 
   create() {
-
     this.physics.world.setBoundsCollision(true, true, true, true);
     this.cursors = this.input.keyboard.createCursorKeys();
 
-    this.bg1 = this.add.tileSprite(0, 0, 3960, 640, 'bg_1') // Use tileSprite for seamless looping
+    this.bg1 = this.add.tileSprite(0, 0, 3960, 640, 'bg_1')
       .setOrigin(0, 0)
       .setScrollFactor(0.05, 0);
 
-    this.bg2 = this.add.tileSprite(0, 0, 3960, 640, 'bg_2') // Use tileSprite for seamless looping
+    this.bg2 = this.add.tileSprite(0, 0, 3960, 640, 'bg_2')
       .setOrigin(0, 0)
       .setScrollFactor(0.1, 0);
 
@@ -30,10 +29,9 @@ class scene2 extends Phaser.Scene {
       scale: { start: .05, end: 0 },
       blendMode: 'ADD',
       tint: 0x000000,
-      frequency: 100, // Decrease the frequency to space out the particles
-      alpha: { start: 0.8, end: 0 }, // Adjust alpha to make particles a little transparent
+      frequency: 100,
+      alpha: { start: 0.8, end: 0 },
   });
-
 
     this.player = this.physics.add.sprite(65, 560, "player");
     this.emitterPlayerTrail.startFollow(this.player);
@@ -42,7 +40,6 @@ class scene2 extends Phaser.Scene {
     this.physics.world.gravity.y = 900;
     this.physics.world.setBounds(0, 0, 20000, 3000);
 
-
     this.floor = this.mapDungeon.createStaticLayer('floor', tiles, 0, 0);
     this.platforms = this.mapDungeon.createStaticLayer('platforms', tiles, 0, 0);
 
@@ -50,19 +47,16 @@ class scene2 extends Phaser.Scene {
     this.floor.setCollisionByProperty({ collides: true });
     this.platforms.setCollisionByProperty({ collides: true });
     this.physics.add.collider(this.player, this.exit, this.exitToMap, null, this);
-    this.physics.add.collider(this.player, this.floor, this.hit, null, this);
+    this.physics.add.collider(this.player, this.floor, null, null, this);
     this.physics.add.collider(this.player, this.platforms, this.hit, null, this);
 
-    //camera functions
     this.cameras.main.setBounds(0, 0, 20000, 640);
     this.cameras.main.startFollow(this.player, true, 0.08, 0.08);
 
     this.isPlayerMoving = false;
 
-    // player animations
     this.player.anims.play('idleAnimation');
 
-    // Create animations
     this.anims.create({
       key: 'moveRight',
       frames: this.anims.generateFrameNumbers('player', { start: 11, end: 20 }),
@@ -77,9 +71,6 @@ class scene2 extends Phaser.Scene {
       repeat: -1
     });
 
-
-    //audio
-
     this.music = this.sound.add("dungeonmusic");
     var musicConfig = {
       mute: false,
@@ -93,10 +84,6 @@ class scene2 extends Phaser.Scene {
     this.music.play(musicConfig);
   }
 
-  hit() {
-    console.log('ouch')
-  }
-
   exitToMap() {
     this.sound.stopAll();
     this.scene.switch('scene4');
@@ -108,18 +95,18 @@ class scene2 extends Phaser.Scene {
 
     if (this.cursors.left.isDown) {
       this.player.setScale(-1, 1);
-      this.player.setVelocityX(-300); // Move left
+      this.player.setVelocityX(-300);
       this.player.anims.play('moveLeft', true);
-      this.player.setOffset(32, 0); // Adjust the body offset when facing left
+      this.player.setOffset(32, 0); 
       
       
     } else if (this.cursors.right.isDown) {
-      this.player.setVelocityX(300); // Move right
+      this.player.setVelocityX(300); 
       this.player.anims.play('moveRight', true);
-      this.player.setOffset(0, 0); // Adjust the body offset when facing left
+      this.player.setOffset(0, 0); 
       this.player.setScale(1, 1);
     } else {
-      this.player.setVelocityX(0); // Stop horizontal movement
+      this.player.setVelocityX(0); 
       this.player.anims.play('idleAnimation');
     }
 
@@ -128,7 +115,7 @@ class scene2 extends Phaser.Scene {
     }
 
     if (this.cursors.up.isDown && this.player.body.onFloor()) {
-      this.player.setVelocityY(-700); // Jump if on the floor
+      this.player.setVelocityY(-700); 
       this.player.anims.play('idleAnimation');
       this.emitterPlayerTrail.setVisible(true);
       this.sound.play('jumpSound', { volume: 0.5 });
@@ -139,7 +126,6 @@ class scene2 extends Phaser.Scene {
     if (yInRange) {
       this.sound.stopAll();
       this.scene.restart(); 
-
     }
   }
 }

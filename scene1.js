@@ -4,7 +4,6 @@ class scene1 extends Phaser.Scene {
   }
 
   create() {
-
     this.music = this.sound.add("overworldmusic");
     var musicConfig = {
         mute: false,
@@ -17,7 +16,6 @@ class scene1 extends Phaser.Scene {
     }
     this.music.play(musicConfig);
 
-
     this.cursors = this.input.keyboard.createCursorKeys();
     this.physics.world.gravity.y = 0;
 
@@ -29,31 +27,23 @@ class scene1 extends Phaser.Scene {
     this.hiddenMap = this.map.createStaticLayer('collide_hidden', tiles, 0, 0);
     this.floor = this.map.createStaticLayer('ground', tiles, 0, 0);
     this.path = this.map.createStaticLayer('path', tiles, 0, 0);
-
     this.stairs = this.map.createStaticLayer('bridge_stairs', tiles, 0, 0);
     this.player = this.physics.add.sprite(170, 290, 'player');
     this.trees = this.map.createStaticLayer('trees', tiles, 0, 0);
+
     this.player.setCollideWorldBounds(true);
-
-    //physics
     this.hiddenMap.setCollisionByProperty({ collides: true });
-    this.physics.add.collider(this.player, this.hiddenMap, this.hit, null, this);
-
-
-    // Player Animations 
-
+    this.physics.add.collider(this.player, this.hiddenMap, null, null, this);
 
     this.anims.create({
-      key: 'idleAnimation',        // Unique key for the animation
+      key: 'idleAnimation',        
       frames: this.anims.generateFrameNumbers('player', { start: 0, end: 10 }),
-      frameRate: 5,  // Frames per second for the animation
-      repeat: -1,                  // Set to -1 to make the animation loop, set to a positive integer for a specific number of repetitions
+      frameRate: 5,
+      repeat: -1,
   });
 
-  // Play the idle animation on the player sprite
   this.player.anims.play('idleAnimation');
 
-    // Create animations
     this.anims.create({
       key: 'moveRight',
       frames: this.anims.generateFrameNumbers('player', { start: 11, end: 20 }),
@@ -87,16 +77,11 @@ class scene1 extends Phaser.Scene {
 
   }
 
-  hit() {
-    console.log('ouch')
-  }
-
   update() {
-    // Set the player's velocity to control movement
+
     const speed = 300;
   
-    this.player.setVelocity(0, 0); // Reset the velocity on each update
-  
+    this.player.setVelocity(0, 0);
     if (this.cursors.up.isDown) {
       this.player.setVelocityY(-speed);
       this.player.anims.play('moveUp', true);
@@ -109,26 +94,25 @@ class scene1 extends Phaser.Scene {
       this.player.setScale(-1, 1);
       this.player.setVelocityX(-speed);
       this.player.anims.play('moveLeft', true);
-      this.player.setOffset(32, 0); // Adjust the body offset when facing left
+      this.player.setOffset(32, 0); 
       
     } else if (this.cursors.right.isDown) {
       this.player.setVelocityX(speed);
       this.player.anims.play('moveRight', true);
-      this.player.setOffset(0, 0); // Adjust the body offset when facing left
+      this.player.setOffset(0, 0); 
       this.player.setScale(1, 1);
     } else {
       this.player.setVelocityX(0);
       this.player.anims.play('idleAnimation', true);
-      this.player.setOffset(0, 0); // Adjust the body offset when facing left
+      this.player.setOffset(0, 0); 
     }
-    // Moves to next map when player has reached coordinates
+
     const xInRange = this.player.x >= 1355 && this.player.x <= 1399;
     const yInRange = this.player.y >= 140 && this.player.y <= 160;
   
     if (xInRange && yInRange) {
       this.sound.stopAll(); 
       this.scene.switch('scene2');
-
     }
   }
 }

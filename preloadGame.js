@@ -8,17 +8,14 @@ class preloadGame extends Phaser.Scene {
       frameWidth: 32,
       frameHeight: 32
     });
-
     this.load.spritesheet("friend", "assets/images/friend_spritesheet.png", {
       frameWidth: 32,
       frameHeight: 32
     });
-
     this.load.spritesheet("fireworks", "assets/images/fireworks.png", {
       frameWidth: 32,
       frameHeight: 32
     });
-
     this.physics.world.setBounds(0, 0, 960, 640);
 
     this.load.tilemapTiledJSON('map', 'assets/tiles/map.json');
@@ -55,13 +52,9 @@ class preloadGame extends Phaser.Scene {
     this.load.audio("woodsmusic", ["assets/audio/woods1.mp3"]);
     this.load.audio("victoryMusic", ["assets/audio/victory_theme.mp3"]);
     this.load.audio("jumpSound", ["assets/audio/jump.mp3"]);
-
   }
   
   create() {
     this.scene.start("sceneMenu");
   }
 }
-
-
-// https://opengameart.org/content/lpc-tile-atlas 
